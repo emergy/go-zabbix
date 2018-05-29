@@ -135,7 +135,7 @@ func (s *Sender) read(conn *net.TCPConn) (res []byte, err error) {
 }
 
 // Method Sender class, send packet to zabbix.
-func (s *Sender) Send(packet *Packet) (res []byte, err error) {
+func (s *Sender) Send(packet *Packet, debug bool) (res []byte, err error) {
 	conn, err := s.connect()
 	if err != nil {
 		return
@@ -144,11 +144,11 @@ func (s *Sender) Send(packet *Packet) (res []byte, err error) {
 
 	dataPacket, _ := json.Marshal(packet)
 
-	/*
+	if debug == true {
 	   fmt.Printf("HEADER: % x (%s)\n", s.getHeader(), s.getHeader())
 	   fmt.Printf("DATALEN: % x, %d byte\n", packet.DataLen(), len(packet.DataLen()))
 	   fmt.Printf("BODY: %s\n", string(dataPacket))
-	*/
+    }
 
 	// Fill buffer
 	buffer := append(s.getHeader(), packet.DataLen()...)
