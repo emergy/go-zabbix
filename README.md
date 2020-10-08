@@ -14,6 +14,7 @@ import (
 const (
     defaultHost  = `localhost`
     defaultPort  = 10051
+    debug        = 0
 )
 
 func main() {
@@ -26,6 +27,6 @@ func main() {
 
     // Send packet to zabbix
     z := NewSender(defaultHost, defaultPort)
-    z.Send(packet)
+    z.Send(packet, debug)
 }
 ```
